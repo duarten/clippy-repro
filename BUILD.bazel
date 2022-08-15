@@ -1,0 +1,22 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@rules_rust//rust:defs.bzl", "rust_binary")
+
+go_library(
+    name = "lib",
+    srcs = ["main.go"],
+    importpath = "main",
+)
+
+go_binary(
+    name = "bin",
+    out = "main",
+    embed = ["lib"],
+    goarch = "amd64",
+    goos = "linux",
+    pure = "on",
+)
+
+rust_binary(
+    name = "rust",
+    srcs = ["main.rs"],
+)
